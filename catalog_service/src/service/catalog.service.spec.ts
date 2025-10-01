@@ -2,6 +2,17 @@ import { ICatalogRepository } from "../interface/catalog.repository.interface";
 import { Product } from "../models/product.model";
 import { MockCatalogRepository } from "../repository/mock.catalog.repository";
 import { CatalogService } from "./catalog.service";
+import {Factory} from  'rosie'
+
+
+
+const productFactory = new Factory()
+.attr("id", 1)
+.attr("name", "Sample Product")
+.attr("description", "This is a sample product description.")
+.attr("price", 100)
+.attr("stock", 50);
+
 
 const mockProduct = (data = {}) => ({
   price: 100,
@@ -64,6 +75,46 @@ describe("catalogService", () => {
       );
     });
   });
+
+  describe('getProducts',()=>{
+    it('should return list of products',async()=>{
+      const limit = 10;
+      const returnProducts = productFactory.buildList(limit);
+      jest.spyOn(repository,'find').mockImplementation(() => Promise.resolve(returnProducts));
+      const products = await service.getProducts(limit,0);
+      expect(products.length).toEqual(limit)
+      expect(products).toMatchObject(returnProducts)
+    })
+
+    it("should fail to fetch products & throw error 'products does not exsit'", async () => {
+      jest
+        .spyOn(repository, "find")
+        .mockImplementationOnce(() =>
+          Promise.reject(new Error("products does not exsit"))
+        );
+      await expect(service.getProducts(0,0)).rejects.toThrow(
+        "products does not exsit"
+      );
+    });
+  })
+
+  describe('getProduct',()=>{
+    it('should return product by id',async()=>{
+      const returnProduct = productFactory.build();
+      jest.spyOn(repository,'findOne').mockImplementation(() => Promise.resolve(returnProduct));
+      const product = await service.getProduct(1);
+      expect(product).toMatchObject(returnProduct)
+    })
+  })
+
+  describe('deleteProduct',()=>{
+    it('should delete a product by id',async()=>{
+      const produtId = 1;
+      jest.spyOn(repository,'delete').mockImplementation(() => Promise.resolve(produtId));
+      const product = await service.deleteProduct(1);
+      expect(product).toEqual(produtId)
+    })
+  })
 
   afterEach(() => {
     repository = {} as MockCatalogRepository;

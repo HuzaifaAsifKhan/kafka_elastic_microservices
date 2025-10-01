@@ -10,12 +10,21 @@ export class CatalogService {
   async createProduct(product: Product): Promise<Product> {
     return await this._repository.create(product);
   }
-  getProduct(id: number) {}
-  getProducts(limit: number, offset: number) {}
+
+  async getProduct(id: number): Promise<Product> {
+    return await this._repository.findOne(id);
+  }
+
+  async getProducts(limit: number, offset: number):Promise<Product[]> {
+    return await this._repository.find(limit, offset);
+  }
+
   async updateProduct(product: Product): Promise<Product> {
     const data = await this._repository.update(product);
     return data;
     //emit event to update record in elastic search
   }
-  deleteProduct(id: number) {}
+  async deleteProduct(id: number) {
+    return await this._repository.delete(id);
+  }
 }

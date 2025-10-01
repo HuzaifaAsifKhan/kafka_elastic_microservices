@@ -7,17 +7,17 @@ export class MockCatalogRepository implements ICatalogRepository {
     const mockProduct: Product = { ...product, id: 1 };
     return Promise.resolve(mockProduct);
   }
-  findOne(id: number): Promise<Product> {
-    throw new Error("Method not implemented.");
+  async findOne(id: number): Promise<Product> {
+    return await Promise.resolve({} as Product);
   }
-  find(): Promise<Product[]> {
-    throw new Error("Method not implemented.");
+  async find(limit:number, offset:number): Promise<Product[]> {
+    return await Promise.resolve([]);
   }
   update(product: Product): Promise<Product> {
     const mockProduct: Product = { ...product };
     return Promise.resolve(mockProduct);
   }
   delete(id: number): Promise<any> {
-    throw new Error("Method not implemented.");
+    return Promise.resolve(id)
   }
 }
