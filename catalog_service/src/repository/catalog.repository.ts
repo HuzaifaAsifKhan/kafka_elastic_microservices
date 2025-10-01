@@ -3,19 +3,19 @@ import { Product } from "../models/product.model";
 
 export class CatalogRepository implements ICatalogRepository {
   constructor() {}
-  create(product: Product): Promise<Product> {
+  async create(product: Product): Promise<Product> {
     throw new Error("Method not implemented.");
   }
-  findOne(id: number): Promise<Product> {
+  async findOne(id: number): Promise<Product> {
     throw new Error("Method not implemented.");
   }
-  find(): Promise<Product[]> {
+  async find(limit: number, ofset: number): Promise<Product[]> {
     throw new Error("Method not implemented.");
   }
-  update(product: Product): Promise<Product> {
+  async update(product: Product): Promise<Product> {
     throw new Error("Method not implemented.");
   }
-  delete(id: number): Promise<any> {
+  async delete(id: number): Promise<any> {
     throw new Error("Method not implemented.");
   }
 }
