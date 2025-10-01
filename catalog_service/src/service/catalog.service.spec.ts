@@ -110,9 +110,9 @@ describe("catalogService", () => {
   describe('deleteProduct',()=>{
     it('should delete a product by id',async()=>{
       const produtId = 1;
-      jest.spyOn(repository,'delete').mockImplementation(() => Promise.resolve(produtId));
+      jest.spyOn(repository,'delete').mockImplementation(() => Promise.resolve({id:produtId}));
       const product = await service.deleteProduct(1);
-      expect(product).toEqual(produtId)
+      expect(product).toEqual({id:produtId})
     })
   })
 
