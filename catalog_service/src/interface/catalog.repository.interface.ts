@@ -1,4 +1,3 @@
-import { AnyARecord } from "dns";
 import { Product } from "../models/product.model";
 
 export interface ICatalogRepository {
