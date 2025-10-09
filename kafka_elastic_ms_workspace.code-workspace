@@ -5,6 +5,9 @@
     },
     {
       "path": "catalog_service"
+    },
+    {
+      "path": "db"
     }
   ],
   "settings": {}

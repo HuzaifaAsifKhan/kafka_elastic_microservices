@@ -1,10 +1,30 @@
 POST http://localhost:3001/products HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
-    "price": 10,
+    "price": 2000,
+    "name": "Asif",
+    "description": "Asif",
+    "stock": 10
+}
+###
+GET http://localhost:3001/products/1 HTTP/1.1
+content-type: application/json
+###
+GET http://localhost:3001/products?limit=10&offset=0 HTTP/1.1
+content-type: application/json
+###
+DELETE http://localhost:3001/products/1 HTTP/1.1
+content-type: application/json
+###
+PATCH http://localhost:3001/products/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "price": 1500,
     "name": "Huzaifa",
     "description": "Huzaifa",
-    "stock": 1
+    "stock": 99
 }
 
+###
